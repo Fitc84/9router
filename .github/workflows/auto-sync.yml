@@ -1,0 +1,37 @@
+name: Scheduled Auto-Sync with Upstream
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Tự động chạy vào lúc 12 giờ đêm mỗi ngày (UTC)
+  workflow_dispatch: # Cho phép bạn bấm nút chạy thủ công bất cứ lúc nào trên web GitHub
+
+jobs:
+  sync:
+    name: Sync Master with Upstream
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Add and Fetch Upstream
+        run: |
+          git remote add upstream https://github.com/decolua/9router.git
+          git fetch upstream master
+
+      - name: Merge Upstream into Master
+        run: |
+          git checkout master
+          # Thử gộp tự động. Nếu không có xung đột, quá trình sẽ hoàn tất.
+          git merge upstream/master -m "chore: auto-sync with latest upstream release"
+
+      - name: Push Updated Master to Your Repository
+        run: |
+          git push origin master
