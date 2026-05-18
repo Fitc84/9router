@@ -13,15 +13,15 @@ const nextConfig = {
   distDir: process.env.NEXT_DIST_DIR || ".next",
   output: "standalone",
   serverExternalPackages: ["better-sqlite3", "sql.js", "node:sqlite", "bun:sqlite"],
-  turbopack: {
-    root: tracingRoot
-  },
   outputFileTracingRoot: tracingRoot,
   outputFileTracingExcludes: {
     "*": ["./gitbook/**/*"]
   },
   images: {
     unoptimized: true
+  },
+  turbopack: {
+    root: tracingRoot
   },
   env: {},
   webpack: (config, { isServer }) => {
