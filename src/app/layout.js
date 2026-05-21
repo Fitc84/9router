@@ -14,19 +14,13 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-export async function generateMetadata() {
-  const isChild = !!process.env.CHILD_INSTANCE_ID;
-  const childName = process.env.CHILD_INSTANCE_NAME;
-  const baseTitle = "9Router - AI Infrastructure Management";
-  
-  return {
-    title: isChild && childName ? `[${childName}] 9Router` : baseTitle,
-    description: "One endpoint for all your AI providers. Manage keys, monitor usage, and scale effortlessly.",
-    icons: {
-      icon: "/favicon.svg",
-    },
-  };
-}
+export const metadata = {
+  title: "9Router - AI Infrastructure Management",
+  description: "One endpoint for all your AI providers. Manage keys, monitor usage, and scale effortlessly.",
+  icons: {
+    icon: "/favicon.svg",
+  },
+};
 
 export const viewport = {
   themeColor: "#0a0a0a",

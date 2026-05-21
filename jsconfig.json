@@ -8,14 +8,5 @@
     },
     "module": "ESNext",
     "moduleResolution": "bundler"
-  },
-  "exclude": [
-    "node_modules",
-    ".next",
-    "out",
-    "dist",
-    "cli",
-    "gitbook"
-  ]
+  }
 }
-

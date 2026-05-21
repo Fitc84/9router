@@ -19,15 +19,11 @@ export async function GET() {
     
     const enableRequestLogs = process.env.ENABLE_REQUEST_LOGS === "true";
     const enableTranslator = process.env.ENABLE_TRANSLATOR === "true";
-    const isChildInstance = !!process.env.CHILD_INSTANCE_ID;
-    const instanceName = process.env.CHILD_INSTANCE_NAME;
     
     return NextResponse.json({ 
       ...safeSettings, 
       enableRequestLogs,
       enableTranslator,
-      isChildInstance,
-      instanceName,
       hasPassword: !!password
     }, { headers: SETTINGS_RESPONSE_HEADERS });
   } catch (error) {
