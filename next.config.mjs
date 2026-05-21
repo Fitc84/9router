@@ -23,6 +23,10 @@ const nextConfig = {
   turbopack: {
     root: tracingRoot
   },
+  experimental: {
+    workerThreads: false,
+    cpus: 1
+  },
   env: {},
   webpack: (config, { isServer }) => {
     // Ignore fs/path modules in browser bundle
@@ -33,8 +37,11 @@ const nextConfig = {
         path: false,
       };
     }
-    // Exclude logs, .next, gitbook subapp from watcher
-    config.watchOptions = { ...config.watchOptions, ignored: /[\\/](logs|\.next|gitbook|cli)[\\/]/ };
+    // Exclude logs, .next, gitbook subapp, .git, and Google Drive sync artifacts from watcher
+    config.watchOptions = {
+      ...config.watchOptions,
+      ignored: /[\\/](logs|\.next|gitbook|cli|\.git|\.tmp\.driveupload)[\\/]|.*\.tmp$|.*\.temp$|.*~$/
+    };
     return config;
   },
   async rewrites() {
