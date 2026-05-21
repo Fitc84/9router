@@ -24,7 +24,7 @@ const nextConfig = {
     unoptimized: true
   },
   experimental: {
-    workerThreads: false,
+    workerThreads: true,
     cpus: 1
   },
   env: {},
